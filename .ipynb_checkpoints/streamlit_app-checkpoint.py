@@ -4,25 +4,28 @@ import joblib
 # Load the regression model
 model = joblib.load('regression_model.pkl')  # Replace with your model file path
 
-# Feature names
+# Define the features
 features = ['ph', 'Solids', 'Chloramines', 'Sulfate', 'Conductivity', 'Organic_carbon', 'Trihalomethanes', 'Turbidity']
 
-# Title and instructions
-st.title("Water Quality Prediction App")
-st.write("Enter the values for the following features:")
+# Create a sidebar with slider bars for each feature
+st.sidebar.header('Feature Values')
 
-# User input for features
-user_input = {}
+# Initialize a dictionary to store feature values
+feature_values = {}
+
+# Iterate through features
 for feature in features:
-    user_input[feature] = st.number_input(feature, min_value=0.0)
+    # Add a slider for each feature
+    feature_values[feature] = st.sidebar.slider(f'{feature}', min_value=0.0, max_value=100.0, value=50.0)
 
-# When the user clicks the "Predict" button
-if st.button("Predict"):
-    # Prepare the data for prediction
-    new_data = [[user_input[feature] for feature in features]]
-    
-    # Make a prediction
+# Assuming you have a function to make predictions
+def predict(feature_values):
+    new_data = [[feature_values[feature] for feature in features]]
     prediction = model.predict(new_data)
-    
-    # Display the prediction
-    st.write(f"The predicted value is: {prediction[0]}")
+    return prediction[0]
+
+# Make prediction
+prediction = predict(feature_values)
+
+# Display the prediction
+st.write(f"The predicted value is: {prediction}")
