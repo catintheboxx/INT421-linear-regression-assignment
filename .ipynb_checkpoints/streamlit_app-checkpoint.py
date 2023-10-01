@@ -4,6 +4,8 @@ import joblib
 # Load the regression model
 model = joblib.load('regression_model.pkl')  # Replace with your model file path
 
+st.title('Water Quality Predictor')
+
 # Define the features
 features = ['ph', 'Solids', 'Chloramines', 'Sulfate', 'Conductivity',
             'Organic_carbon', 'Trihalomethanes', 'Turbidity']
