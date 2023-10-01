@@ -4,25 +4,20 @@ import joblib
 # Load the regression model
 model = joblib.load('regression_model.pkl')  # Replace with your model file path
 
-# Feature names
+# Define the features
 features = ['ph', 'Solids', 'Chloramines', 'Sulfate', 'Conductivity', 'Organic_carbon', 'Trihalomethanes', 'Turbidity']
 
-# Title and instructions
-st.title("Water Quality Prediction App")
-st.write("Enter the values for the following features:")
+# Set up Streamlit app
+st.title('Water Quality Predictor')
 
-# User input for features
-user_input = {}
+# Create sliders for each feature
+feature_values = []
 for feature in features:
-    user_input[feature] = st.number_input(feature, min_value=0.0)
+    value = st.slider(f'Select value for {feature}', min_value=0.0, max_value=1000.0, step=0.01, key=feature)
+    feature_values.append(value)
 
-# When the user clicks the "Predict" button
-if st.button("Predict"):
-    # Prepare the data for prediction
-    new_data = [[user_input[feature] for feature in features]]
-    
-    # Make a prediction
+# Create a button to trigger prediction
+if st.button('Predict'):
+    new_data = [feature_values]
     prediction = model.predict(new_data)
-    
-    # Display the prediction
     st.write(f"The predicted value is: {prediction[0]}")
