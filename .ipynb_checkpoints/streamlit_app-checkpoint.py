@@ -8,7 +8,7 @@ model = joblib.load('regression_model.pkl')  # Replace with your model file path
 features = ['ph', 'Solids', 'Chloramines', 'Sulfate', 'Conductivity', 'Organic_carbon', 'Trihalomethanes', 'Turbidity']
 
 # Title and instructions
-st.title("Water Quality Prediction App")
+st.title("Water hardness, a measure of mineral content")
 st.write("Enter the values for the following features:")
 
 # User input for features
