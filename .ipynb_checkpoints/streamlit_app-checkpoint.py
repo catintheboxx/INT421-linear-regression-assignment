@@ -13,7 +13,7 @@ st.title('Water Quality Predictor')
 # Create sliders for each feature
 feature_values = []
 for feature in features:
-    value = st.slider(f'Select value for {feature}', min_value=0.0, max_value=100000.0, step=0.01, key=feature)
+    value = st.slider(f'Select value for {feature}', min_value=0.0, max_value=100000.0, step=0.00001, key=feature)
     feature_values.append(value)
 
 # Create a button to trigger prediction
